@@ -10,13 +10,13 @@ const users = [
   {
     name: "Suraj Rana",
     isAdmin: true,
-    email: "admin@example.com",
+    email: "suraj@example.com",
     password: bcrypt.hash("1234", 10),
   },
   {
     name: "Chintu Rana",
     isAdmin: true,
-    email: "admin@example.com",
+    email: "chintu@example.com",
     password: bcrypt.hash("1234", 10),
   },
 ];

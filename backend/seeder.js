@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import colors from "colors";
+import dotenv from "dotenv";
 import users from "./data/users.js";
 import products from "./data/products.js";
 import User from "./models/userModel.js";
@@ -22,7 +22,7 @@ const importData = async () => {
     const adminUser = createdUser[0]._id;
 
     const sampleProducts = products.map((product) => {
-      return { ...product, adminUser };
+      return { ...product, user: adminUser };
     });
 
     await Product.insertMany(sampleProducts);
@@ -30,7 +30,7 @@ const importData = async () => {
     console.log("Data Imported! ".green.inverse);
     process.exit();
   } catch (error) {
-    console.error(`{error}`.red.inverse);
+    console.error(`{error}`.pink.inverse);
     process.exit(1);
   }
 };
@@ -40,18 +40,7 @@ const destroyData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
-
-    const createdUser = await User.insertMany(users);
-
-    const adminUser = createdUser[0]._id;
-
-    const sampleProducts = products.map((product) => {
-      return { ...product, adminUser };
-    });
-
-    await Product.insertMany(sampleProducts);
-
-    console.log("Data Imported! ".green.inverse);
+    console.log("Data Destroyed! ".yellow.inverse);
     process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
@@ -60,7 +49,7 @@ const destroyData = async () => {
 };
 
 if (process.argv[2] === "-d") {
-  importData();
-} else {
   destroyData();
+} else {
+  importData();
 }
