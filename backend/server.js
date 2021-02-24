@@ -1,27 +1,19 @@
 import express from "express";
-import products from "./data/products.js";
-// const dotenv = require("dotenv");
 import connectDb from "./config/db.js";
 import dotenv from "dotenv";
 import colors from "colors";
+import productsRouter from "./routes/productRoutes.js";
 
 dotenv.config();
 connectDb();
 
 const app = express();
+app.use("/api/products", productsRouter);
 
 app.get("/", (req, res) => {
   res.send("Health Ok");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.json(product);
-});
 const port = process.env.PORT;
 
 app.listen(port, (err) => {
