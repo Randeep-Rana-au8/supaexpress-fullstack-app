@@ -1,20 +1,22 @@
 import express from "express";
 import connectDb from "./config/db.js";
 import dotenv from "dotenv";
+dotenv.config();
 import colors from "colors";
 import productsRouter from "./routes/productRoutes.js";
-
-dotenv.config();
-connectDb();
-
+import { handleError, notFound } from "./middlewares/errorHandlers.js";
 const app = express();
-app.use("/api/products", productsRouter);
+const port = process.env.PORT;
+
+connectDb();
 
 app.get("/", (req, res) => {
   res.send("Health Ok");
 });
 
-const port = process.env.PORT;
+app.use("/api/products", productsRouter);
+app.use(notFound);
+app.use(handleError);
 
 app.listen(port, (err) => {
   if (err) console.log(err);
