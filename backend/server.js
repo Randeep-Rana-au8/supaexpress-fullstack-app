@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import colors from "colors";
 import userRouter from "./routes/userRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import { handleError, notFound } from "./middlewares/errorHandlers.js";
 const port = process.env.PORT;
@@ -14,6 +15,7 @@ connectDb();
 app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
 app.use(notFound);
 app.use(handleError);
 
