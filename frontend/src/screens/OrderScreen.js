@@ -17,7 +17,7 @@ const OrderScreen = ({ match }) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  const orderPay = useSelector((state) => state.orderDetails);
+  const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
   const addDecimal = (num) => {
@@ -57,7 +57,7 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [orderId, dispatch, successPay, order]);
+  }, [successPay, orderId, dispatch, order]);
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
@@ -89,9 +89,9 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Delivered On {order.deliveredAt}</Message>
+                <Message variant="success"> Delivered On {order.deliveredAt}</Message>
               ) : (
-                <Message variant="danger"> Not Delivered</Message>
+                <Message variant="danger"> Not Delivered </Message>
               )}
             </ListGroup.Item>
 
