@@ -108,4 +108,13 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-export { authUser, getUserProfile, registerUser, updateUserProfile };
+// @desc    get all users
+// @access  Private Admin Only
+// @routes  GET /api/users
+
+const getUsers = async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+};
+
+export { authUser, getUsers, getUserProfile, registerUser, updateUserProfile };
