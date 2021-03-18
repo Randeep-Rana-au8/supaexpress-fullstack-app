@@ -3,15 +3,26 @@ import { Col, Container, Image, ListGroup, Row, Card, Button, Form } from "react
 import { Link } from "react-router-dom";
 import Rating from "../components/Rating";
 import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../actions/productActions";
+import { listProductDetails, createProductReview } from "../actions/productActions";
+
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const ProductScreen = ({ history, match }) => {
-  const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const dispatch = useDispatch();
+
   const productDetails = useSelector((state) => state.productDetails);
   const { error, loading, product } = productDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  const { error: errorProductReview, success: successProductReview } = productReviewCreate;
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
@@ -22,16 +33,16 @@ const ProductScreen = ({ history, match }) => {
   };
 
   return (
-    <div>
-      <Container>
-        <Link to="/" type="button" className="btn btn-dark my-3">
-          GO Back
-        </Link>
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
+    <>
+      <Link to="/" type="button" className="btn btn-dark my-3">
+        GO Back
+      </Link>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <>
           <Row>
             <Col md={6}>
               <Image src={product.image} fluid />
@@ -99,9 +110,35 @@ const ProductScreen = ({ history, match }) => {
               </Card>
             </Col>
           </Row>
-        )}
-      </Container>
-    </div>
+          <Row>
+            <Col>
+              <h2>Reviews </h2>
+              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              <ListGroup>
+                {product.reviews.map((review) => (
+                  <ListGroup.Item key={review._id}>
+                    <strong>{review.name}</strong>
+                    <Rating value={review.rating} />
+                    <p>{review.createdAt.substring(0, 10)}</p>
+                    <p>{review.comment}</p>
+                  </ListGroup.Item>
+                ))}
+                <ListGroup.Item>
+                  <h2>Write a customer review</h2>
+                  {userInfo ? (
+                    <h1></h1>
+                  ) : (
+                    <Message variant="danger">
+                      Please <Link to="/login">sign in</Link> to write a review
+                    </Message>
+                  )}
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+          </Row>
+        </>
+      )}
+    </>
   );
 };
 
