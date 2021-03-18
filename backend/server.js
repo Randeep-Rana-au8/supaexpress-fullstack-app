@@ -1,11 +1,13 @@
 import express from "express";
+import path from "path";
 import connectDb from "./config/db.js";
 import dotenv from "dotenv";
 dotenv.config();
 import colors from "colors";
-import userRouter from "./routes/userRoutes.js";
-import orderRouter from "./routes/orderRoutes.js";
-import productRouter from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import { handleError, notFound } from "./middlewares/errorHandlers.js";
 const port = process.env.PORT;
 const app = express();
@@ -13,10 +15,15 @@ const app = express();
 connectDb();
 
 app.use(express.json());
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
-app.use("/api/orders", orderRouter);
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/upload", uploadRoutes);
 app.get("/api/config/paypal", (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
 app.use(notFound);
 app.use(handleError);
 

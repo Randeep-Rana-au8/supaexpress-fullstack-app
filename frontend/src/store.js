@@ -20,29 +20,36 @@ import {
 } from "./reducers/userReducers";
 import {
   orderCreateReducer,
+  orderDeliverReducer,
   orderDetailsReducer,
   orderListMyReducer,
+  orderListReducer,
   orderPayReducer,
 } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
+  cart: cartReducer,
+  //Product Reducers
   productList: productListReducer,
   productDetails: productDetailsReducer,
   productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
   productUpdate: productUpdateReducer,
-  cart: cartReducer,
+  //User Reducers
   userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
-  userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
-  orderCreate: orderCreateReducer,
-  orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer,
-  orderListMy: orderListMyReducer,
   userUpdate: userUpdateReducer,
+  userDetails: userDetailsReducer,
+  userRegister: userRegisterReducer,
+  userUpdateProfile: userUpdateProfileReducer,
+  //Order Reducers
+  orderPay: orderPayReducer,
+  orderList: orderListReducer,
+  orderListMy: orderListMyReducer,
+  orderCreate: orderCreateReducer,
+  orderDeliver: orderDeliverReducer,
+  orderDetails: orderDetailsReducer,
 });
 
 const middlewares = [thunk];
