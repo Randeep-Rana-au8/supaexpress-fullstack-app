@@ -6,7 +6,13 @@ const Footer = () => {
     <footer>
       <Container>
         <Row className="text-center py-3">
-          <Col>Copyright &copy; SupaExpress</Col>
+          <Col>
+            Copyright &copy; SupaExpress (Made with ❤️ by{" "}
+            <a href="http://rana-portfolio.vercel.app" target="_blank" rel="noopener noreferrer">
+              <span style={{ color: "red" }}>Randeep Rana</span>
+            </a>
+            )
+          </Col>
         </Row>
       </Container>
     </footer>
