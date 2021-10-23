@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
 import SearchBox from "./SearchBox";
 import { Route } from "react-router-dom";
+import "../App.css";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar variant="dark" expand="lg" collapseOnSelect sticky="true" className="header">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>SupaExpress</Navbar.Brand>

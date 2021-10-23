@@ -28,11 +28,63 @@
   color: #61dafb;
 }
 
+.header {
+  background-color: rgb(41, 109, 199);
+  color: white;
+}
+
+.topRated {
+  display: flex;
+  padding-bottom: 50px;
+}
+
+.featured {
+  margin: 20px;
+  width: 100%;
+}
+
+.featured:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px black;
+}
+
+.featured img {
+  width: 100%;
+}
+
+.topProducts {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.topProducts img {
+  width: 100%;
+}
+
+.topProduct {
+  width: 45%;
+  margin: 0 10px;
+}
+
+.topProduct:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 10px black;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .topRated {
+    flex-direction: column;
+    align-items: center;
   }
 }

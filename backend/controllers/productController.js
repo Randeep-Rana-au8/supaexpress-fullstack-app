@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler";
 // @access  Public
 // @routes  /api/products
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -17,8 +17,8 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const count = await Product.countDocuments({ ...keyword });
-  const products = await Product.find({ ...keyword })
+  const count = await Product.countDocuments({ ...keyword, isFeatured: false });
+  const products = await Product.find({ ...keyword, isFeatured: false })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
@@ -66,6 +66,7 @@ const createProduct = asyncHandler(async (req, res) => {
     countInStock: 0,
     numReviews: 0,
     description: "Sample description",
+    isFeatured: false,
   });
 
   const createdProduct = await product.save();
@@ -139,7 +140,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 // @access  Public
 // @routes  GET /api/products/top
 const getTopProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  const products = await Product.find({ isFeatured: true }).sort({ rating: -1 }).limit(5);
   res.json(products);
 });
 

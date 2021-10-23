@@ -58,7 +58,7 @@ const ProductScreen = ({ history, match }) => {
         <>
           <Meta title={product.name} />
           <Row>
-            <Col md={6}>
+            <Col md={6} style={{ textAlign: "center" }}>
               <Image src={product.image} fluid />
             </Col>
             <Col md={3}>

@@ -10,6 +10,7 @@ import ProductCarousel from "../components/ProductCarousel";
 
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
+import Featured from "../components/Featured";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -30,13 +31,13 @@ const HomeScreen = ({ match }) => {
 
       {!keyword ? (
         // <ProductCarousel />
-        <h1>Product Carousel</h1>
+        <Featured />
       ) : (
         <Link to="/" type="button" className="btn btn-light">
           GO Back
         </Link>
       )}
-      <h1>Latest Products</h1>
+      <h1>New Launches</h1>
       {loading ? (
         <Loader />
       ) : error ? (
