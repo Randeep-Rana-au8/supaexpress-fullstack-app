@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
+import { connect } from "react-redux";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -166,5 +167,8 @@ const ProfileScreen = ({ location, history }) => {
     </Row>
   );
 };
+function mapStateToProps(state) {
+  return {};
+}
 
-export default ProfileScreen;
+export default connect(mapStateToProps)(ProfileScreen);
