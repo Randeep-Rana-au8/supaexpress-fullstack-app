@@ -139,7 +139,7 @@ const OrderScreen = ({ history, match }) => {
                           <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.price * item.qty}
+                          {item.qty} x &#x20b9;{item.price} = &#x20b9;{item.price * item.qty}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -158,25 +158,25 @@ const OrderScreen = ({ history, match }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>&#x20b9;{order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>&#x20b9;{order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>&#x20b9;{order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>&#x20b9;{order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
